@@ -25,7 +25,11 @@ LT <- data.frame(Age = col.Age,
                  Tx  = integer(ncols),
                  ex  = numeric(ncols))
 
+# define two scopes (row selectors):
+# scope - all but last row (85 to inf)
+# scope2 - all but first and last row
 scope <- 1:(ncols-1)
+scope2 <- 2:(ncols-1)
 
 # Step 1: calculate n: number of years in the age interval x
 #
@@ -74,7 +78,6 @@ LT$ndx <- LT$Ix * LT$nqx
 LT$nLx[1] <- 0.3*LT$Ix[1] + 0.7*LT$Ix[2]
 #
 # middle rows
-scope2 <- 2:(ncols-1)
 LT[scope2,]$nLx <- LT[scope2,]$n * (LT[scope2,]$Ix - 0.5*LT[scope2,]$ndx)
 #
 # last row
